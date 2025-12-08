@@ -1,0 +1,23 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/avr-g++",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Wunused",
+      "-Werror",
+      "-W",
+      "-fdata-sections",
+      "-mmcu=atmega328p",
+      "-DF_CPU=16000000",
+      "-c",
+      "-o",
+      "main.o",
+      "main.cpp"
+    ],
+    "directory": "/home/mchavis/Desktop/Dev/Arduino",
+    "file": "/home/mchavis/Desktop/Dev/Arduino/main.cpp",
+    "output": "/home/mchavis/Desktop/Dev/Arduino/main.o"
+  }
+]
