@@ -1,5 +1,5 @@
 /compile_commands.json
-./.cache/
+/.cache
 /*.o
 /*.hex
 /*.elf

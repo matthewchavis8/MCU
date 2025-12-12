@@ -1,12 +1,11 @@
 
-Source         := main.cpp
+Source         := Sketch/blink.cpp
 ModuleName     := main
 MCU            := atmega328p
 Flags  				 := -Os -Wall -Wextra -Wunused -Werror -W -fdata-sections
 DF_CPU         := 16000000
 BAUD_RATE      := 115200
 PORT 					 := /dev/ttyACM0
-File     		   := main.cpp
 
 default:
 	avr-g++ $(Flags) -mmcu=$(MCU) -DF_CPU=$(DF_CPU) 					         \
