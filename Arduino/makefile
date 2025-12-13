@@ -1,5 +1,5 @@
 
-Source         := Sketch/blink.cpp
+Source         := Sketch/trafficLight.cpp
 ModuleName     := main
 MCU            := atmega328p
 Flags  				 := -Os -Wall -Wextra -Wunused -Werror -W -fdata-sections
