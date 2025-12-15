@@ -1,7 +1,7 @@
 
 SOURCE        := UART.cpp
 OBJFILES      := UART.o
-LIBRARY       := UART.a
+LIBRARY       := libUART.a
 Flags  				:= -Os -Wall -Wextra -Wunused -Werror -W -fdata-sections
 
 MCU           := atmega328p

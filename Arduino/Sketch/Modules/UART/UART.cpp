@@ -2,10 +2,12 @@
 #include <avr/io.h>
 #include <stddef.h>
 
-#define BAUD_RATE  115200
+#ifndef F_CPU
+#  error "Define F_CPU (e.g. -DF_CPU=16000000UL)"
+#endif
 
 static inline uint16_t ubrrFromBaud(uint32_t baud) {
-  return static_cast<uint32_t>((BAUD_RATE / (8UL * baud)) - 1UL);
+  return static_cast<uint16_t>((F_CPU / (8UL * baud)) - 1UL);
 }
 
 void uartInit(uint32_t baud) {
@@ -14,21 +16,19 @@ void uartInit(uint32_t baud) {
   uint16_t ubrr = ubrrFromBaud(baud);
   UBRR0H = static_cast<uint8_t>(ubrr >> 8);
   UBRR0L = static_cast<uint8_t>(ubrr & 0xFF);
-
+ 
+  UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
   UCSR0B = (1 << TXEN0);
 }
 
 void uartPutCh(char c) {
-  while (!(UCSR0A & (1 << UDRE0))) {}
 
+  if (c == '\n') {
+    while (!(UCSR0A & (1 << UDRE0))) {}
+    uartPutCh('\r');
+  }
+
+  while (!(UCSR0A & (1 << UDRE0))) {}
   UDR0 = static_cast<uint8_t>(c);
 }
 
-template <size_t N>
-void print(const char (&str)[N]) {
-  static_assert(N > 0, "NULL String");
-  static_assert(str[N - 1], "String must be null terminated");
-
-  for (auto ch : str)
-    uartPutCh(ch);
-}

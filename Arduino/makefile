@@ -9,15 +9,25 @@ PORT 					 := /dev/ttyACM0
 
 MODULES_DIR := Sketch/Modules
 
-default:
-	avr-g++ $(Flags) -mmcu=$(MCU) -DF_CPU=$(DF_CPU) 					         \
-		-c $(Source) -o $(ModuleName).o                  				         
-	avr-g++ -mmcu=$(MCU) $(ModuleName).o -o $(ModuleName).elf          
+LINK_MODULES ?= UART
+
+INCLUDES := $(foreach m,$(LINK_MODULES),-I$(MODULES_DIR)/$(m))
+LIBS     := $(foreach m,$(LINK_MODULES),$(MODULES_DIR)/$(m)/lib$(m).a)
+
+modules:
+	@for m in $(LINK_MODULES); do \
+		$(MAKE) -C $(MODULES_DIR)/$$m; \
+	done
+
+default: modules
+	avr-g++ $(Flags) -mmcu=$(MCU) -DF_CPU=$(DF_CPU) $(INCLUDES) \
+		-c $(Source) -o $(ModuleName).o
+	avr-g++ -mmcu=$(MCU) $(ModuleName).o $(LIBS) -o $(ModuleName).elf
 	avr-objcopy -O ihex -R .eeprom $(ModuleName).elf $(ModuleName).hex
 
-flash:
+flash: default
 	avrdude -v -p $(MCU) -c arduino -P $(PORT) -b $(BAUD_RATE) -D \
-		-U flash:w:main.hex:i
+		-U flash:w:$(ModuleName).hex:i
 
 clean:
 	rm -rf *.o *.elf *.hex

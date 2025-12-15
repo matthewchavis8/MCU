@@ -1,15 +1,20 @@
 
-#ifndef __PRINT_H__
-#define __PRINT_H__
-
-#define BAUD_RATE  115200
+#ifndef __UART_H__
+#define __UART_H__
 
 #include <stdint.h>
 #include <avr/io.h>
+#include <stddef.h>
 
 void uartInit(uint32_t baud);
 void uartPutCh(char c);
 
-void print(const char* str);
 
-#endif // !__PRINT_H__
+template <size_t N>
+inline void print(const char (&str)[N]) {
+
+  for (auto ch : str)
+    uartPutCh(ch);
+}
+
+#endif // !__UART_H__
