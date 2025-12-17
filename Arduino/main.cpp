@@ -3,10 +3,10 @@
 
 int main() {
 
-  uartInit(115200);
 
+  Uart uart(115200);
   while (1) {
-    print("Hello World\n");
+    uart.print("Your mom is gay\n");
     _delay_ms(1000);
   }
 }
