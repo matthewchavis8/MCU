@@ -1,12 +1,20 @@
-#include "UART.h"
+#include <avr/io.h>
+#include <stddef.h>
 #include <util/delay.h>
+#include "Modules/Hal/write.h"
+
 
 int main() {
+  constexpr uint8_t ledPins[] = { PB0, PB1, PB2, PB3, PB4, PB5 };
+  for (auto pin : ledPins)
+    DDRB |= (1 << pin);
 
-
-  Uart uart(115200);
-  while (1) {
-    uart.print("LOLLLL IS IT WORKING????\n");
-    _delay_ms(1000);
+  for (;;) {
+    for (auto pin : ledPins) {
+      digitalWrite(pin, true);
+      _delay_ms(100);
+      digitalWrite(pin, false);
+      _delay_ms(100);
+    }
   }
 }
