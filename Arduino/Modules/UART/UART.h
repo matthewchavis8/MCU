@@ -17,6 +17,7 @@ public:
 
   static inline void print(const char* str) noexcept {
     auto uartPutCh = [](char c) {
+      // Make sure its clear idk something it tweaks
       while (!(UCSR0A & (1 << UDRE0))) {}
       UDR0 = static_cast<uint8_t>(c);
     };
