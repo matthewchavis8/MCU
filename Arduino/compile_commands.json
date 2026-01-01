@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/mchavis/Desktop/Dev/MCU/Arduino/build",
+  "command": "/usr/bin/avr-g++  -I/home/mchavis/Desktop/Dev/MCU/Arduino/Modules/UART -I/home/mchavis/Desktop/Dev/MCU/Arduino/Modules/KeyPad -O3 -DNDEBUG -mmcu=atmega328p -DF_CPU=16000000UL -Os -Wall -Wextra -Werror -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -o CMakeFiles/main.elf.dir/main.cpp.obj -c /home/mchavis/Desktop/Dev/MCU/Arduino/main.cpp",
+  "file": "/home/mchavis/Desktop/Dev/MCU/Arduino/main.cpp",
+  "output": "CMakeFiles/main.elf.dir/main.cpp.obj"
+},
+{
+  "directory": "/home/mchavis/Desktop/Dev/MCU/Arduino/build/Modules/UART",
+  "command": "/usr/bin/avr-g++  -I/home/mchavis/Desktop/Dev/MCU/Arduino/Modules/UART -O3 -DNDEBUG -mmcu=atmega328p -DF_CPU=16000000UL -Os -Wall -Wextra -Werror -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -o CMakeFiles/UART.dir/UART.cpp.obj -c /home/mchavis/Desktop/Dev/MCU/Arduino/Modules/UART/UART.cpp",
+  "file": "/home/mchavis/Desktop/Dev/MCU/Arduino/Modules/UART/UART.cpp",
+  "output": "Modules/UART/CMakeFiles/UART.dir/UART.cpp.obj"
+},
+{
+  "directory": "/home/mchavis/Desktop/Dev/MCU/Arduino/build/Modules/KeyPad",
+  "command": "/usr/bin/avr-g++  -I/home/mchavis/Desktop/Dev/MCU/Arduino/Modules/KeyPad -O3 -DNDEBUG -mmcu=atmega328p -DF_CPU=16000000UL -Os -Wall -Wextra -Werror -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -o CMakeFiles/KeyPad.dir/keyPad.cpp.obj -c /home/mchavis/Desktop/Dev/MCU/Arduino/Modules/KeyPad/keyPad.cpp",
+  "file": "/home/mchavis/Desktop/Dev/MCU/Arduino/Modules/KeyPad/keyPad.cpp",
+  "output": "Modules/KeyPad/CMakeFiles/KeyPad.dir/keyPad.cpp.obj"
+}
+]
