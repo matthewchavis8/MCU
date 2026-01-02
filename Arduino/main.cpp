@@ -1,15 +1,39 @@
-#include <avr/io.h>
-#include <stddef.h>
+#include "Modules/KeyPad/keyPad.h"
+#include "UART.h"
 #include <util/delay.h>
-#include "Modules/Hal/write.h"
+
+constexpr uint8_t MAKE_PIN(uint8_t portId, uint8_t bit) { return (portId << 3) | (bit & 7); }
+
+constexpr uint8_t PB0_ENC = MAKE_PIN(PORT_B, 0);
+constexpr uint8_t PB1_ENC = MAKE_PIN(PORT_B, 1);
+constexpr uint8_t PD2_ENC = MAKE_PIN(PORT_D, 2);
+constexpr uint8_t PD3_ENC = MAKE_PIN(PORT_D, 3);
+constexpr uint8_t PD4_ENC = MAKE_PIN(PORT_D, 4);
+constexpr uint8_t PD5_ENC = MAKE_PIN(PORT_D, 5);
+constexpr uint8_t PD6_ENC = MAKE_PIN(PORT_D, 6);
+constexpr uint8_t PD7_ENC = MAKE_PIN(PORT_D, 7);
+
+static const char keys[4][4] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'},
+};
+
+static const uint8_t rowPins[4] = { PB1_ENC, PB0_ENC, PD7_ENC, PD6_ENC };
+static const uint8_t colPins[4] = { PD5_ENC, PD4_ENC, PD3_ENC, PD2_ENC };
 
 int main() {
-  pinMode(PB0, PinMode::Output);
-  
-  while (true) {
-    digitalWrite(PB0, true);
-    _delay_ms(300);
-    digitalWrite(PB0, false);
-    _delay_ms(300);
+  KeyPad<4,4> keyPad(keys, rowPins, colPins);
+  Uart uart(115200);
+
+  for (;;) {
+    char key = keyPad.getKey();
+    if (key != '\0') {
+      uart.print("Pressed: ");
+      char s[2] = { key, '\0' };
+      uart.print(s);
+      uart.print("\r\n");
+    }
   }
 }

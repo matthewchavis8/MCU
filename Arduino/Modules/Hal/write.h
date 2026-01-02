@@ -86,7 +86,8 @@ static inline void digitalWrite(uint8_t pin, bool high) noexcept {
 }
 
 [[nodiscard]] static inline bool digitalRead(uint8_t pin) noexcept {
-  auto* in = readReg(PIN_PORT(pin));
+  auto* in = readReg(pin); 
+  
   if (!in)
     return false;
 
