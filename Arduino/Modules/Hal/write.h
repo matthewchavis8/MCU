@@ -76,10 +76,13 @@ static inline void digitalWrite(uint8_t pin, bool high) noexcept {
     return;
 
   uint8_t mask = (1u << PIN_BIT(pin));
-  if (high) 
+
+  if (high) {
     *port |= mask;
-  else 
-    *port &= ~mask;
+    return;
+  }
+  
+  *port &= ~mask;
 }
 
 [[nodiscard]] static inline bool digitalRead(uint8_t pin) noexcept {

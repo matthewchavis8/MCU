@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #include <stddef.h>
 #include <util/delay.h>
-#include "Modules/Hal/write.h"
+#include "../Hal/write.h"
 
 int main() {
    
