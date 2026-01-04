@@ -12,6 +12,8 @@ constexpr uint8_t PIN_BIT(uint8_t pin)  { return pin & 7; }
 // @brief detects the pin's Port
 constexpr uint8_t PIN_PORT(uint8_t pin) { return pin >> 3; }
 
+constexpr uint8_t MAKE_PIN(uint8_t portId, uint8_t bit) { return (portId << 3) | (bit & 7); }
+
 enum class PinMode : uint8_t { Input, InputPullup, Output };
 
 static inline volatile uint8_t* ddrReg(uint8_t pin) noexcept {
