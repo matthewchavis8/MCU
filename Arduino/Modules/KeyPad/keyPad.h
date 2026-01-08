@@ -2,7 +2,7 @@
 #define __KEYPAD_H__
 
 #include "stddef.h"
-#include "../Hal/write.h"
+#include "../Hal/Digital/write.h"
 #include <util/delay.h>
 
 template <uint8_t ROW, uint8_t COL>

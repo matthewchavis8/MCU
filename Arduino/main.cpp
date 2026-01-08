@@ -3,6 +3,13 @@
 #include "stddef.h"
 #include <util/delay.h>
 
+/*
+ *
+ * Learning a interrupt for the first time
+ *
+ *
+ * Note: had 3 beers and bored
+ * */
 
 int main() {
   constexpr uint8_t pinB0 { MAKE_PIN(PORT_B, 0) };
@@ -11,7 +18,7 @@ int main() {
   pinMode(pinB0, PinMode::Output);
   pinMode(pinD2, PinMode::InputPullup);
 
-
+  // Polling Version constantly checking button state
   for (;;) {
     bool btnState { digitalRead(pinD2) };
 
@@ -24,4 +31,6 @@ int main() {
 
     _delay_ms(100);
   }
+
+  // Interrupt Version less cpu cycle only setting an interrupt when button is hit
 }
