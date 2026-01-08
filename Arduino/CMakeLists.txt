@@ -21,6 +21,7 @@ add_link_options(
 )
 
 add_subdirectory(Modules/UART)
+add_subdirectory(Modules/Hal/Interrupt)
 
 add_executable(main.elf
   main.cpp
@@ -30,6 +31,7 @@ add_executable(main.elf
 target_link_libraries(main.elf
  PRIVATE
  UART
+ Interrupt
 )
 
 # Flash Stuff is here
