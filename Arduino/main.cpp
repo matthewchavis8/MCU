@@ -1,14 +1,12 @@
 #include "Modules/Hal/Digital/write.h"
 #include "Modules/Hal/Interrupt/interrupt.h"
 #include "stddef.h"
+#include <avr/interrupt.h>
 #include <util/delay.h>
 
 /*
  *
  * Learning a interrupt for the first time
- *
- *
- * Note: had 3 beers and bored
  * */
 
 int main() {
@@ -18,19 +16,13 @@ int main() {
   pinMode(pinB0, PinMode::Output);
   pinMode(pinD2, PinMode::InputPullup);
 
-  // Polling Version constantly checking button state
+  ButtonInt0 btn;
+  btn.init();
+  sei(); // Global interrupts on
+
   for (;;) {
-    bool btnState { digitalRead(pinD2) };
-
-    if (!btnState) {
-      digitalWrite(pinB0, true);
-      _delay_ms(100);
-      digitalWrite(pinB0, false);
-      _delay_ms(100);
+    if (btn.take()) {
+      digitalWrite(pinB0, !digitalRead(pinB0));
     }
-
-    _delay_ms(100);
   }
-
-  // Interrupt Version less cpu cycle only setting an interrupt when button is hit
 }
